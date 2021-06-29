@@ -11,7 +11,7 @@ from pathlib import Path
 
 import udmi
 
-LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
+LOGLEVEL = os.environ.get("LOGLEVEL", "DEBUG").upper()
 
 log.basicConfig(stream=sys.stdout, level=LOGLEVEL)
 
@@ -31,10 +31,10 @@ def main(argv=sys.argv[1:]):
     try:
         getattr(udmi, payload_type).from_string(payload)
         log.info("Valid payload structure")
+        return 0
     except Exception:
-        log.warning("Malformed payload")
-
-    return 0
+        log.warning("Malformed payload structure")
+        return 1
 
 
 if __name__ == "__main__":
