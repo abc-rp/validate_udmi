@@ -1,0 +1,2 @@
+pyudmi==0.0.6
+requests # should be included with pyudmi
