@@ -1,0 +1,14 @@
+= validate_udmi
+
+Simple CLI application to validate UDMI payloads using the link:https://pypi.org/project/pyudmi/[pyudmi library].
+
+NOTE: This tool is currently device and point naming standard agnostic.
+
+Example:
+
+[source,sh]
+----
+validate_udmi mypointset.json --type Pointset
+
+validate_udmi mymetadata.json --type MetaData
+----
