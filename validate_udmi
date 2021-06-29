@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""
+Validate UDMI files
+"""
+
+import argparse
+import logging as log
+import os
+import sys
+from pathlib import Path
+
+import udmi
+
+LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
+
+log.basicConfig(stream=sys.stdout, level=LOGLEVEL)
+
+
+def main(argv=sys.argv[1:]):
+    parser = argparse.ArgumentParser(description="Validate UDMI files.")
+    parser.add_argument("input", help="input file")
+    parser.add_argument(
+        "--type", default="Pointset", help="Payload type (e.g Pointset, MetaData)"
+    )
+
+    args = parser.parse_args(args=argv)
+
+    payload = Path(args.input).read_text()
+    payload_type = args.type
+
+    try:
+        getattr(udmi, payload_type).from_string(payload)
+        log.info("Valid payload structure")
+    except Exception:
+        log.warning("Malformed payload")
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
