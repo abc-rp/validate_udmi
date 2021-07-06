@@ -33,7 +33,7 @@ def main(argv=sys.argv[1:]):
         log.info("Valid payload structure")
         return 0
     except Exception:
-        log.warning("Malformed payload structure")
+        log.exception("Malformed payload structure")
         return 1
 
 
