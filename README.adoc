@@ -4,7 +4,11 @@ Simple CLI application to validate UDMI payloads using the link:https://pypi.org
 
 NOTE: This tool is currently device and point naming standard agnostic.
 
-Example:
+== Installation
+
+`python3 -m pip install -r requirements.txt`
+
+== Usage
 
 [source,sh]
 ----
