@@ -11,8 +11,47 @@ NOTE: This tool is currently device and point naming standard agnostic.
 == Usage
 
 [source,sh]
-----
-validate_udmi mypointset.json --type Pointset
 
-validate_udmi mymetadata.json --type MetaData
+=== Help
+----
+$ ./validate_udmi -h
+            _ _     _       _         _   _ ____  __  __ ___ 
+__   ____ _| (_) __| | __ _| |_ ___  | | | |  _ \|  \/  |_ _|
+\ \ / / _` | | |/ _` |/ _` | __/ _ \ | | | | | | | |\/| || | 
+ \ V / (_| | | | (_| | (_| | ||  __/ | |_| | |_| | |  | || | 
+  \_/ \__,_|_|_|\__,_|\__,_|\__\___|  \___/|____/|_|  |_|___|
+                                                             
+
+usage: validate_udmi [-h] [--type TYPE] input
+
+Validate UDMI files.
+
+positional arguments:
+  input        input file
+
+optional arguments:
+  -h, --help   show this help message and exit
+  --type TYPE  Payload type (Pointset, MetaData, State, Config, Discovery)
+----
+
+=== Progam execution
+
+To validate a Pointset UDMI payload
+----
+validate_udmi --type Pointset mypointset.json 
+----
+
+To validate a MetaData UDMI payload
+----
+validate_udmi --type MetaData mymetadata.json 
+----
+
+To validate a State UDMI payload
+----
+validate_udmi --type State mystate.json 
+----
+
+To validate a Config UDMI payload
+----
+validate_udmi --type Config myconfig.json 
 ----

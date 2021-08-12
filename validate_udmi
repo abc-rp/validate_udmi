@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 
 import udmi
+from pyfiglet import Figlet
 
 LOGLEVEL = os.environ.get("LOGLEVEL", "DEBUG").upper()
 
@@ -17,10 +18,14 @@ log.basicConfig(stream=sys.stdout, level=LOGLEVEL)
 
 
 def main(argv=sys.argv[1:]):
+
+    figl = Figlet(font='standard')
+    print(figl.renderText('validate UDMI'))
+
     parser = argparse.ArgumentParser(description="Validate UDMI files.")
     parser.add_argument("input", help="input file")
     parser.add_argument(
-        "--type", default="Pointset", help="Payload type (e.g Pointset, MetaData)"
+        "--type", default="Pointset", help="Payload type (Pointset, MetaData, State, Config, Discovery)"
     )
 
     args = parser.parse_args(args=argv)
@@ -29,13 +34,13 @@ def main(argv=sys.argv[1:]):
     payload_type = args.type
 
     try:
-        getattr(udmi, payload_type).from_string(payload)
+        res = getattr(udmi, payload_type).from_string(payload)
+        print(res)
         log.info("Valid payload structure")
         return 0
-    except Exception:
-        log.exception("Malformed payload structure")
+    except Exception as e:
+        log.exception("Malformed payload structure: {0}".format(e))
         return 1
-
 
 if __name__ == "__main__":
     sys.exit(main())
